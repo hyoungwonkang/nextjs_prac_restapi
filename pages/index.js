@@ -1,17 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import axios from "axios";
 
-export async function getServerSideProps() {
-  const usersReq = await axios.get("http://localhost:3000/api/04/users");
-  return {
-    props: {
-      users: usersReq.data,
-    },
-  };
-}
-
-function HomePage({ users }) {
+function List({ users }) {
   return (
     <ul>
       {users.map((user) => (
@@ -25,4 +15,28 @@ function HomePage({ users }) {
   );
 }
 
-export default HomePage;
+function Users() {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const req = await fetch("/api/04/users");
+      const users = await req.json();
+
+      setLoading(false);
+      setData(users);
+    }
+
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      {loading && <div>Loading users...</div>}
+      {data && <List users={data} />}
+    </div>
+  );
+}
+
+export default Users;
