@@ -1,6 +1,6 @@
 {
   "name": "boilerplate",
-  "version": "0.1.0",
+  "version": "1.22.11",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,5 +11,9 @@
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "./cjs/*": "./cjs/*.js",
+  "devDependencies": {
+    "@babel/helper-compilation-targets": "^7.22.15"
   }
 }
