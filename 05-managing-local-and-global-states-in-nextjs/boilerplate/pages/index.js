@@ -1,5 +1,5 @@
-import ProductCard from '../components/ProductCard';
-import products from '../data/items';
+import ProductCard from "../components/ProductCard";
+import products from "../data/items";
 
 function Home() {
   return (

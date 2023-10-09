@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -33,3 +34,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 # nextjs_prac_restapi
+=======
+This is the code repository for [Real-World Next.js](https://www.packtpub.com/product/real-world-next-js/9781801073493), published by Packt.
+>>>>>>> Stashed changes
