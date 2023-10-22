@@ -1,11 +1,10 @@
 import Head from "next/head";
-import { useState } from "react";
-import ShoppingCartContext from "../components/context/cartContext";
+import { Provider } from "react-redux";
+import { useStore } from "../redux/store";
 import Navbar from "../components/Navbar";
 
 function MyApp({ Component, pageProps }) {
-  const [items, setItems] = useState({});
-
+  const store = useStore(pageProps.initialReduxState);
   return (
     <>
       <Head>
@@ -14,12 +13,12 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <ShoppingCartContext.Provider value={{ items, setItems }}>
+      <Provider store={store}>
         <Navbar />
         <div className="w-9/12 m-auto pt-10">
           <Component {...pageProps} />
         </div>
-      </ShoppingCartContext.Provider>
+      </Provider>
     </>
   );
 }

@@ -1,13 +1,16 @@
-import { useContext } from "react";
-import ShoppingCartContext from "../components/context/cartContext";
+import { useSelector, shallowEqual } from "react-redux";
 import data from "../data/items";
+
+function useGlobalItems() {
+  return useSelector((state) => state, shallowEqual);
+}
 
 function getFullItem(id) {
   const idx = data.findIndex((item) => item.id === id);
   return data[idx];
 }
 function Cart() {
-  const { items } = useContext(ShoppingCartContext);
+  const items = useGlobalItems();
   const total = Object.keys(items)
     .map((id) => getFullItem(id).price * items[id])
     .reduce((x, y) => x + y, 0);

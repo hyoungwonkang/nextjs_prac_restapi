@@ -1,9 +1,10 @@
-import { useContext } from "react";
 import Link from "next/link";
-import ShoppingCartContext from "./context/cartContext";
-
+import { useSelector, shallowEqual } from "react-redux";
+function useGlobalItems() {
+  return useSelector((state) => state, shallowEqual);
+}
 function Navbar() {
-  const { items } = useContext(ShoppingCartContext);
+  const items = useGlobalItems();
   const totalItemsAmount = Object.values(items).reduce((x, y) => x + y, 0);
 
   return (

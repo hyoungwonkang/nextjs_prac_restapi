@@ -1,21 +1,14 @@
-import { useContext } from "react";
-import ShoppingCartContext from "./context/cartContext";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+
+function useGlobalItems() {
+  return useSelector((state) => state, shallowEqual);
+}
 
 // eslint-disable-next-line no-unused-vars
 function ProductCard({ id, name, price, picture }) {
-  const { setItems, items } = useContext(ShoppingCartContext);
+  const dispatch = useDispatch();
+  const items = useGlobalItems();
   const productAmount = items?.[id] ?? 0;
-  const handleAmount = (action) => {
-    if (action === "increment") {
-      const newItemAmount = id in items ? items[id] + 1 : 1;
-      setItems({ ...items, [id]: newItemAmount });
-    }
-    if (action === "decrement") {
-      if (items?.[id] > 0) {
-        setItems({ ...items, [id]: items[id] - 1 });
-      }
-    }
-  };
 
   return (
     <div className="bg-gray-200 p-6 rounded-md">
@@ -30,14 +23,14 @@ function ProductCard({ id, name, price, picture }) {
         <button
           className="pl-2 pr-2 bg-red-400 text-white rounded-md"
           disabled={productAmount === 0}
-          onClick={() => handleAmount("decrement")}
+          onClick={() => dispatch({ type: "DECREMENT", id })}
         >
           -
         </button>
         <div>{/* To be implemented */}</div>
         <button
           className="pl-2 pr-2 bg-green-400 text-white rounded-md"
-          onClick={() => handleAmount("increment")}
+          onClick={() => dispatch({ type: "INCREMENT", id })}
         >
           +
         </button>
